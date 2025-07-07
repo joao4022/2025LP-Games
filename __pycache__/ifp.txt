@@ -1,0 +1,177 @@
+'''
+CALCULADORA DE OPERAÇÕES BÁSICAS
+João Pedro
+30-02/06-07/2025
+'''
+
+# Importa a função para mostrar várias linhas (efeito de limpar a tela)
+def limpaTela():
+    print('\n' * 30)  
+    # Mostra 30 linhas em branco
+
+# Função para mostrar uma mensagem centralizada na tela
+def exibeMensagem(mensagem):
+    limpaTela() 
+    # Limpa a tela primeiro
+    print('=' * 40) 
+    # Linha superior
+    print(mensagem.center(40))
+    # Mostra a mensagem no centro (40 colunas)
+    print('=' * 40) 
+    # Linha inferior
+
+# SOMA → Adiciona dois números
+def soma(a, b):
+    return a + b 
+# Retorna o valor da soma
+
+# SUBTRAÇÃO → Subtrai o segundo número do primeiro
+def subtracao(a, b):
+    return a - b 
+# Retorna o valor da subtração
+
+# MULTIPLICAÇÃO → Multiplica dois números
+def multiplicacao(a, b):
+    return a * b 
+# Retorna o valor da multiplicação
+
+# DIVISÃO → Divide um número pelo outro
+def divisao(a, b):
+    if b != 0:  
+        # Verifica se o divisor não é zero
+        return a / b
+    # Retorna o valor da divisão
+    else:
+        return ' Não pode dividir por zero!'
+    # Retorna mensagem de erro
+
+# DIVISÃO INTEIRA → Divide e pega só a parte inteira do resultado
+def divisao_inteira(a, b):
+    if b != 0:  
+        # Verifica se o divisor não é zero
+        return a // b  
+    # Retorna a parte inteira da divisão
+    else:
+        return ' Não pode dividir por zero!'
+    # Mensagem de erro
+
+# POTÊNCIA → Eleva um número ao expoente (a ^ b)
+def potencia(a, b):
+    return a ** b 
+# Retorna o valor da potência
+
+# RAIZ QUADRADA → Calcula a raiz quadrada de um número
+def raiz_quadrada(a):
+    if a >= 0:  
+        # Verifica se o número não é negativo
+        return a ** 0.5 
+    # Retorna a raiz quadrada
+    else:
+        return ' Raiz de número negativo não existe nos reais!'  # Erro
+
+# Função principal do programa (onde tudo começa)
+def main():
+    exibeMensagem("CALCULADORA DE OPERAÇÕES")  # Mostra o título
+    while True:
+        try:
+            qtd = int(input("Quantas operações você quer fazer? "))
+            if qtd < 1:
+                print("Digite um número inteiro positivo!")
+            else:
+                break
+        except ValueError:
+            print("Digite um número válido!")
+
+for i in range(qtd):
+    # Repete o cálculo a quantidade de vezes desejada
+    print(f"\n\n\n\nOperação {i+1}:") 
+    # Mostra o número da operação
+    print("Escolha a operação:")  
+    # Mostra o menu de opções
+    print("[1] Soma")
+    print("[2] Subtração")
+    print("[3] Multiplicação")
+    print("[4] Divisão")
+    print("[5] Divisão inteira")
+    print("[6] Potência")
+    print("[7] Fatoração")
+
+    
+    # Garante que o usuário digite um número inteiro válido
+    while True:
+        try:
+            op = int(input("Digite o número da operação: ")) 
+            # Lê a opção
+            break  
+        # Sai do laço se estiver tudo certo
+        except ValueError: 
+            # Se digitar letra ou algo errado
+            print(" Digite um número válido!") 
+            # Mostra mensagem de erro
+
+    # Se a operação for de dois números, pede os dois
+    if op in [1, 2, 3, 4, 5, 6]:
+        a = float(input("Digite o primeiro número: "))
+        # Primeiro número
+        b = float(input("Digite o segundo número: ")) 
+        # Segundo número
+    elif op == 7:
+        a = float(input("Digite o número: ")) 
+        # Para raiz, só precisa de um número
+        b = None  
+        # Segundo número não será usado
+
+    # Mostra o resultado de acordo com a operação escolhida
+    print("\nResultado:")
+    if op == 1:
+        print(soma(a, b))
+    elif op == 2:
+        print(subtracao(a, b))
+    elif op == 3:
+        print(multiplicacao(a, b))
+    elif op == 4:
+        print(divisao(a, b))
+    elif op == 5:
+        print(divisao_inteira(a, b))
+    elif op == 6:
+        print(potencia(a, b))
+    elif op == 7:
+        a = int(input("Digite um número inteiro para fatorar: "))
+        print(fatoracao(a))
+    else:
+        print(" Operação inválida!")
+        # Se a pessoa digitar um número errado
+# FATORAÇÃO → Decompõe um número inteiro em fatores primos
+def fatoracao(a):
+    if not isinstance(a, int) or a < 2:
+        return ' Só é possível fatorar inteiros maiores que 1!'
+    fatores = []
+    divisor = 2
+    n = a
+    while n > 1:
+        while n % divisor == 0:
+            fatores.append(divisor)
+            n //= divisor
+        divisor += 1
+    return ' x '.join(map(str, fatores))
+
+# Função que pergunta se o usuário quer continuar
+def playAgain():
+    print('\nDeseja fazer mais operações?')
+    print('[1] Sim')
+    print('[0] Não')
+    escolha = input('Digite sua escolha: ') 
+    # Lê a resposta do usuário
+    return escolha == '1' 
+# Retorna True se for 1 (Sim)
+
+# Depois das operações, pergunta se quer continuar
+if playAgain():
+    main()  
+    # Recomeça o programa
+else:
+    print("\nObrigado por usar a calculadora! ")  
+    # Despedida
+# Aqui é onde o programa começa de verdade
+if __name__ == "__main__":
+    main()
